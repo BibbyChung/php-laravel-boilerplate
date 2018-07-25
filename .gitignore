@@ -1,0 +1,14 @@
+app/node_modules
+app/public
+app/storage/*.key
+app/vendor
+app/.idea
+app/.vscode
+app/.vagrant
+app/Homestead.json
+app/Homestead.yaml
+app/npm-debug.log
+app/yarn-error.log
+app/.env
+
+ops/laradock
