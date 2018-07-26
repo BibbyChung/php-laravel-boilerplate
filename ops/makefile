@@ -48,5 +48,14 @@ all-down:
 project-create:
 	cd $(LARADOCK_PATH) && docker-compose run --rm --user laradock workspace composer create-project laravel/laravel $(PROJECT_NAME)
 
+
+heroku-web-build:
+	docker build -t registry.heroku.com/b-php1/web -f ./heroku/app.dockerfile ../
+heroku-web-up:
+	docker run --rm -p 8888:8889 -e PORT=8889 -e DEBUG=TRUE registry.heroku.com/b-php1/web
+heroku-web-publish:
+	heroku container:login && docker push registry.heroku.com/b-php1/web && heroku container:release web -a b-php1
+
+
 test:
 	@echo $(CURRENT_PATH)
