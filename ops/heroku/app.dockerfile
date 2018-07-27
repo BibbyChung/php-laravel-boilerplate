@@ -33,10 +33,7 @@ RUN rm /var/cache/apk/* && \
 FROM php:7-fpm-alpine
 
 RUN apk update && apk upgrade
-RUN apk add --update wget \
-  curl \
-  git \
-  grep \
+RUN apk add --update \
   build-base \
   libmemcached-dev \
   libmcrypt-dev \
@@ -50,7 +47,11 @@ RUN apk add --update wget \
   cyrus-sasl-dev \
   libgsasl-dev \
   supervisor \
-  nginx
+  nginx \
+  grep \
+  wget \
+  curl \
+  git
 
 RUN docker-php-ext-install mysqli mbstring pdo pdo_mysql tokenizer xml
 RUN pecl channel-update pecl.php.net \
@@ -60,7 +61,7 @@ RUN pecl channel-update pecl.php.net \
     && docker-php-ext-enable imagick \
     && pecl install mcrypt-1.0.1
 
-RUN mkdir -p /run/nginx
+RUN mkdir -p /run/nginx && mkdir -p /var/tmp/nginx
 
 RUN rm /var/cache/apk/* && \
     mkdir -p /var/www
